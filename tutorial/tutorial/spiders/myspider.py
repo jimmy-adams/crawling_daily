@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 import scrapy
+import sys
+sys.path.append('..')
 from tutorial.items import TutorialItem
 class BlogSpider(scrapy.Spider):
     name = 'Qingdao_daily'
     start_urls = ['http://www.dailyqd.com/epaper/html/2020-06/17/node_2.htm']
 
     def parse(self, response):
+        print('receive')
         items = TutorialItem()
         items['Pubtime'] = response.css('div.dzb_time span::text').get() # get the current publish time of the daily, jihuidong
         for content in response.css('div.dzb_right_bt_nav li'):
